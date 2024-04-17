@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:bsn_clothes/screens/login.dart';
+import 'package:bsn_clothes/screens/home.dart';
+import 'package:bsn_clothes/screens/product.dart';
+import 'package:bsn_clothes/screens/form.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -32,6 +37,13 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      initialRoute: '/login', // Route initiale
+      routes: {
+        '/login': (context) => LoginPage(),
+        '/home': (context) => HomePage(),
+        '/product': (context) => ProductPage(),
+        '/form': (context) => FormPage(),
+      },
     );
   }
 }
