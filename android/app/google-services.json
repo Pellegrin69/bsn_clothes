@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "114140221907",
+    "project_id": "bsn-clothes",
+    "storage_bucket": "bsn-clothes.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:114140221907:android:0481e7adfb9c89145a5f26",
+        "android_client_info": {
+          "package_name": "com.example.bsn_clothes"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBl_xA8vUSTqqahe6I14ht_DkXr_8p2b7M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

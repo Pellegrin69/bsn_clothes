@@ -1,0 +1,22 @@
+{
+    "flutter": {
+        "platforms": {
+            "android": {
+                "default": {
+                    "projectId": "bsn-clothes",
+                    "appId": "1:114140221907:android:0481e7adfb9c89145a5f26",
+                    "fileOutput": "android/app/google-services.json"
+                }
+            },
+            "dart": {
+                "lib/firebase_options.dart": {
+                    "projectId": "bsn-clothes",
+                    "configurations": {
+                        "android": "1:114140221907:android:0481e7adfb9c89145a5f26",
+                        "ios": "1:114140221907:ios:2c95b6e78bae161b5a5f26"
+                    }
+                }
+            }
+        }
+    }
+}
