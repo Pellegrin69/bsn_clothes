@@ -1,16 +1,27 @@
-# bsn_clothes
+# BSN Clothes
 
-A new Flutter project.
+Le but de notre application sera de faire un vinted c’est à dire, faire une interface de vente de vêtements.
 
-## Getting Started
+## Fonctionnalités :
 
-This project is a starting point for a Flutter application.
+- Connexion, création de compte
+- Navigation entre des pages “catégories”
+- Navigation vers des pages “produit” sur lesquelles on peut acheter le produit
+- Possibilité de créer une annonce
 
-A few resources to get you started if this is your first Flutter project:
+Bonus :
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- Gestion d’un panier pour acheter plusieurs produits d’un coup
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Tâches :
+
+- Wireframe → Manu
+- Backend Dart → Pierre
+    - API CRUD produit
+    - Sign in, sign up
+    - Fake BDD (JSON)
+- Pages et routing → Gauthier
+- Page accueil → Manu
+- Page de connexion → Pierre
+- Page produit → Gauthier
+- Formulaire création d’annonce → ensemble
