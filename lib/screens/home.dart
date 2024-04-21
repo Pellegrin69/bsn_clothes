@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:bsn_clothes/widgets/navbar.dart';
 
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Accueil'),
-      ),
+      appBar: NavBar(),
+      endDrawer: NavBar.buildDrawer(context),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -15,14 +15,14 @@ class HomePage extends StatelessWidget {
               onPressed: () {
                 Navigator.pushNamed(context, '/product');
               },
-              child: Text('Voir les produits'),
+              child: const Text('Voir les produits'),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
                 Navigator.pushNamed(context, '/form');
               },
-              child: Text('Créer une annonce'),
+              child: const Text('Créer une annonce'),
             ),
           ],
         )
