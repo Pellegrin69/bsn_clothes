@@ -15,6 +15,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp(
+    name: 'bsn-clothes',
     options: DefaultFirebaseOptions.currentPlatform,
   );
 

@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:bsn_clothes/widgets/navbar.dart';
+import 'package:bsn_clothes/widgets/product_preview.dart';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -9,7 +13,32 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: NavBar(),
       endDrawer: NavBar.buildDrawer(context),
-      body: Center(
+      body: StreamBuilder<QuerySnapshot>(
+        stream: FirebaseFirestore.instance.collection('articles').snapshots(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          }
+          if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+            return const Center(child: Text('Aucun produit trouvé.'));
+          }
+          final articles = snapshot.data!.docs;
+          return ListView.builder(
+            itemCount: articles.length,
+            itemBuilder: (context, index) {
+              final article = articles[index];
+              return ProductPreview(
+                id: article.get('id'),
+                title: article.get('title'),
+                picture: article.get('picture'),
+                price: article.get('price'),
+              );
+            },
+          );
+        },
+      ),
+
+      /* body: Center(
           child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -27,7 +56,7 @@ class HomePage extends StatelessWidget {
             child: const Text('Créer une annonce'),
           ),
         ],
-      )),
+      )), */
     );
   }
 }
