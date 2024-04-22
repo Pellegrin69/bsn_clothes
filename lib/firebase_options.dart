@@ -4,16 +4,6 @@ import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
 import 'package:flutter/foundation.dart'
     show defaultTargetPlatform, kIsWeb, TargetPlatform;
 
-/// Default [FirebaseOptions] for use with your Firebase apps.
-///
-/// Example:
-/// ```dart
-/// import 'firebase_options.dart';
-/// // ...
-/// await Firebase.initializeApp(
-///   options: DefaultFirebaseOptions.currentPlatform,
-/// );
-/// ```
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
@@ -52,6 +42,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '114140221907',
     projectId: 'bsn-clothes',
     authDomain: 'bsn-clothes.firebaseapp.com',
+    databaseURL: 'https://bsn-clothes-default-rtdb.europe-west1.firebasedatabase.app',
     storageBucket: 'bsn-clothes.appspot.com',
     measurementId: 'G-EX9GWDBGLR',
   );
@@ -61,6 +52,7 @@ class DefaultFirebaseOptions {
     appId: '1:114140221907:android:0481e7adfb9c89145a5f26',
     messagingSenderId: '114140221907',
     projectId: 'bsn-clothes',
+    databaseURL: 'https://bsn-clothes-default-rtdb.europe-west1.firebasedatabase.app',
     storageBucket: 'bsn-clothes.appspot.com',
   );
 
@@ -69,7 +61,10 @@ class DefaultFirebaseOptions {
     appId: '1:114140221907:ios:2c95b6e78bae161b5a5f26',
     messagingSenderId: '114140221907',
     projectId: 'bsn-clothes',
+    databaseURL: 'https://bsn-clothes-default-rtdb.europe-west1.firebasedatabase.app',
     storageBucket: 'bsn-clothes.appspot.com',
+    iosClientId: '114140221907-hn5bj99b3g4lrc2j7c5kfptv9fupeeib.apps.googleusercontent.com',
     iosBundleId: 'com.example.bsnClothes',
   );
+
 }

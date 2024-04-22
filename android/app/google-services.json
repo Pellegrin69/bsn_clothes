@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "114140221907",
+    "firebase_url": "https://bsn-clothes-default-rtdb.europe-west1.firebasedatabase.app",
     "project_id": "bsn-clothes",
     "storage_bucket": "bsn-clothes.appspot.com"
   },
@@ -12,7 +13,12 @@
           "package_name": "com.example.bsn_clothes"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "114140221907-v24qa7mrvkvapim4cdngpp3vj99lr7te.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyBl_xA8vUSTqqahe6I14ht_DkXr_8p2b7M"
@@ -20,7 +26,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "114140221907-v24qa7mrvkvapim4cdngpp3vj99lr7te.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "114140221907-hn5bj99b3g4lrc2j7c5kfptv9fupeeib.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.bsnClothes"
+              }
+            }
+          ]
         }
       }
     }
