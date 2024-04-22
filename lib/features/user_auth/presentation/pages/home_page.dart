@@ -1,10 +1,8 @@
 import 'package:bsn_clothes/features/user_auth/presentation/pages/login_page.dart';
+import 'package:bsn_clothes/global/common/toast.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-// import 'package:fluttertoast/fluttertoast.dart';
-
-// import '../../../../global/common/toast.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -27,10 +25,10 @@ class _HomePageState extends State<HomePage> {
             children: [
               GestureDetector(
                 onTap: () {
-                  _createData(UserModel(
-                    username: "Henry",
-                    age: 21,
-                    adress: "London",
+                  _createData(ArticleModel(
+                    brand: "Nike",
+                    color: "red",
+                    size: "M",
                   ));
                 },
                 child: Container(
@@ -51,7 +49,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               const SizedBox(height: 10),
-              StreamBuilder<List<UserModel>>(
+              StreamBuilder<List<ArticleModel>>(
                   stream: _readData(),
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
@@ -61,31 +59,34 @@ class _HomePageState extends State<HomePage> {
                     }
                     if (snapshot.data!.isEmpty) {
                       return const Center(child: Text("No Data Yet"));
+                    } else {
+                      print(snapshot);
                     }
-                    final users = snapshot.data;
+                    final articles = snapshot.data;
                     return Padding(
                       padding: const EdgeInsets.all(8),
                       child: Column(
-                          children: users!.map((user) {
+                          children: articles!.map((article) {
                         return ListTile(
                           leading: GestureDetector(
                             onTap: () {
-                              _deleteData(user.id!);
+                              _deleteData(article.id!);
                             },
                             child: const Icon(Icons.delete),
                           ),
                           trailing: GestureDetector(
                             onTap: () {
-                              _updateData(UserModel(
-                                id: user.id,
-                                username: "John Wick",
-                                adress: "Pakistan",
+                              _updateData(ArticleModel(
+                                id: article.id,
+                                brand: "Adidas",
+                                color: "black",
+                                size: "S",
                               ));
                             },
                             child: const Icon(Icons.update),
                           ),
-                          title: Text(user.username!),
-                          subtitle: Text(user.adress!),
+                          title: Text(article.brand!),
+                          subtitle: Text(article.color!),
                         );
                       }).toList()),
                     );
@@ -98,7 +99,7 @@ class _HomePageState extends State<HomePage> {
                       MaterialPageRoute(
                           builder: (context) => const LoginPage()));
                   // Navigator.pushNamed(context, "/login");
-                  // showToast(message: "Successfully signed out");
+                  showToast(message: "Successfully signed out");
                 },
                 child: Container(
                   height: 45,
@@ -122,75 +123,106 @@ class _HomePageState extends State<HomePage> {
         ));
   }
 
-  Stream<List<UserModel>> _readData() {
-    final userCollection = FirebaseFirestore.instance.collection("users");
+  Stream<List<ArticleModel>> _readData() {
+    final articleCollection = FirebaseFirestore.instance.collection("articles");
 
-    return userCollection.snapshots().map((qureySnapshot) => qureySnapshot.docs
-        .map(
-          (e) => UserModel.fromSnapshot(e),
-        )
-        .toList());
+    // return articleCollection.snapshots().map((qureySnapshot) =>
+    //     qureySnapshot.docs.map((e) => (ArticleModel.fromSnapshot(e))).toList());
+    return articleCollection.snapshots().map((querySnapshot) {
+      List<ArticleModel> articles = querySnapshot.docs.map((doc) {
+        print("Document: $doc");
+        print("Document ID: ${doc.id}");
+
+        return ArticleModel.fromSnapshot(doc);
+      }).toList();
+
+      return articles;
+    });
   }
 
-  void _createData(UserModel userModel) {
-    final userCollection = FirebaseFirestore.instance.collection("users");
+  void _createData(ArticleModel articleModel) {
+    final articleCollection = FirebaseFirestore.instance.collection("articles");
 
-    String id = userCollection.doc().id;
+    String id = articleCollection.doc().id;
 
-    final newUser = UserModel(
-      username: userModel.username,
-      age: userModel.age,
-      adress: userModel.adress,
+    final newArticle = ArticleModel(
       id: id,
+      brand: articleModel.brand,
+      color: articleModel.color,
+      size: articleModel.size,
     ).toJson();
 
-    userCollection.doc(id).set(newUser);
+    articleCollection.doc(id).set(newArticle);
   }
 
-  void _updateData(UserModel userModel) {
-    final userCollection = FirebaseFirestore.instance.collection("users");
+  void _updateData(ArticleModel articleModel) {
+    final articleCollection = FirebaseFirestore.instance.collection("articles");
 
-    final newData = UserModel(
-      username: userModel.username,
-      id: userModel.id,
-      adress: userModel.adress,
-      age: userModel.age,
+    final newData = ArticleModel(
+      id: articleModel.id,
+      brand: articleModel.brand,
+      color: articleModel.color,
+      size: articleModel.size,
     ).toJson();
 
-    userCollection.doc(userModel.id).update(newData);
+    articleCollection.doc(articleModel.id).update(newData);
   }
 
   void _deleteData(String id) {
-    final userCollection = FirebaseFirestore.instance.collection("users");
+    final articleCollection = FirebaseFirestore.instance.collection("articles");
 
-    userCollection.doc(id).delete();
+    articleCollection.doc(id).delete();
   }
 }
 
-class UserModel {
-  final String? username;
-  final String? adress;
-  final int? age;
+class ArticleModel {
   final String? id;
+  final String? brand;
+  final String? color;
+  final String? size;
 
-  UserModel({this.id, this.username, this.adress, this.age});
+  ArticleModel({this.id, this.brand, this.color, this.size});
 
-  static UserModel fromSnapshot(
+  static ArticleModel fromSnapshot(
       DocumentSnapshot<Map<String, dynamic>> snapshot) {
-    return UserModel(
-      username: snapshot['username'],
-      adress: snapshot['adress'],
-      age: snapshot['age'],
-      id: snapshot['id'],
-    );
+    try {
+      // Vérifier si le document est null ou vide
+      if (snapshot == null || !snapshot.exists) {
+        throw Exception("Document vide ou inexistant.");
+      }
+
+      // Extraire les données du document
+      String id = snapshot.get('id') ?? ""; // Valeur par défaut si null
+      String brand = snapshot.get('brand') ?? ""; // Valeur par défaut si null
+      String color = snapshot.get('color') ?? ""; // Valeur par défaut si null
+      String size = snapshot.get('size') ?? ""; // Valeur par défaut si null
+
+      // Créer et retourner un objet ArticleModel
+      return ArticleModel(
+        id: id,
+        brand: brand,
+        color: color,
+        size: size,
+      );
+    } catch (e) {
+      // Gérer l'exception et afficher un message d'erreur
+      print("Erreur lors de la création de l'objet ArticleModel: $e");
+      // Vous pouvez choisir de renvoyer null ou un objet ArticleModel avec des valeurs par défaut
+      return ArticleModel(
+        id: "",
+        brand: "",
+        color: "",
+        size: "",
+      );
+    }
   }
 
   Map<String, dynamic> toJson() {
     return {
-      "username": username,
-      "age": age,
       "id": id,
-      "adress": adress,
+      "brand": brand,
+      "color": color,
+      "size": size,
     };
   }
 }

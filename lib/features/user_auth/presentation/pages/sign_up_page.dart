@@ -1,11 +1,10 @@
 import 'package:bsn_clothes/features/user_auth/presentation/pages/home_page.dart';
 import 'package:bsn_clothes/features/user_auth/presentation/pages/login_page.dart';
 import 'package:bsn_clothes/features/user_auth/presentation/widgets/form_container_widget.dart';
+import 'package:bsn_clothes/global/common/toast.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../firebase_auth_implementation/firebase_auth_services.dart';
-
-// import 'package:flutter_firebase/global/common/toast.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -146,7 +145,7 @@ class _SignUpPageState extends State<SignUpPage> {
       isSigningUp = false;
     });
     if (user != null) {
-      // showToast(message: "User is successfully created");
+      showToast(message: "User is successfully created");
       // Navigator.pushNamed(context, "/home");
       Navigator.push(
           context,
@@ -154,7 +153,7 @@ class _SignUpPageState extends State<SignUpPage> {
             builder: (context) => const HomePage(),
           ));
     } else {
-      // showToast(message: "Some error happend");
+      showToast(message: "Some error happened");
     }
   }
 }

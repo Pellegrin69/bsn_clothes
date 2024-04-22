@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class NavBar extends StatelessWidget implements PreferredSizeWidget {
@@ -64,6 +65,7 @@ class NavBar extends StatelessWidget implements PreferredSizeWidget {
             title: const Text('Se déconnecter'),
             onTap: () {
               // Action à effectuer lorsqu'on clique sur "Se déconnecter"
+              FirebaseAuth.instance.signOut(); // Déconnecte l'utilisateur
               Navigator.pop(context); // Ferme le drawer
               // Naviguer vers la page de connexion
               Navigator.pushNamed(context, '/login');

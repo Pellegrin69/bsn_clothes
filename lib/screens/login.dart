@@ -13,17 +13,17 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: LoginPage(),
+      home: LoginPage2(),
     );
   }
 }
 
-class LoginPage extends StatefulWidget {
+class LoginPage2 extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginPageState extends State<LoginPage2> {
   int _selectedIndex = 0;
 
   static List<Widget> _widgetOptions = <Widget>[
