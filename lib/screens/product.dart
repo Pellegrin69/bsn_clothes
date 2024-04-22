@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class ProductPage extends StatelessWidget {
+  const ProductPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -11,10 +13,10 @@ class ProductPage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           // Carrousel d'images
-          SizedBox(
+          const SizedBox(
             height: 300, // Ajustez la hauteur selon vos besoins
             child: Carousel(
-              imagePaths: const [
+              imagePaths: [
                 'lib/assets/image_1.jpg',
                 'lib/assets/image_2.jpg',
                 'lib/assets/image_3.jpg',
@@ -69,7 +71,7 @@ class ProductPage extends StatelessWidget {
 class Carousel extends StatelessWidget {
   final List<String> imagePaths;
 
-  Carousel({required this.imagePaths});
+  const Carousel({super.key, required this.imagePaths});
 
   @override
   Widget build(BuildContext context) {
@@ -91,5 +93,4 @@ class Carousel extends StatelessWidget {
       },
     );
   }
-
 }

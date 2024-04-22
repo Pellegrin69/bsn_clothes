@@ -1,11 +1,14 @@
-import 'package:bsn_clothes/features/app/splash_screen/splash_screen.dart';
+import 'package:bsn_clothes/widgets/splash_screen.dart';
+
+import 'package:bsn_clothes/screens/signup.dart';
 import 'package:bsn_clothes/screens/form.dart';
 import 'package:bsn_clothes/screens/home.dart';
+import 'package:bsn_clothes/screens/login.dart';
 import 'package:bsn_clothes/screens/product.dart';
+
 import 'package:flutter/material.dart';
 
 import 'package:firebase_core/firebase_core.dart';
-import 'features/user_auth/presentation/pages/login_page.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
@@ -30,14 +33,12 @@ class MyApp extends StatelessWidget {
       home: const SplashScreen(
         child: LoginPage(),
       ),
-
-      // initialRoute: '/login',
-
       routes: {
-        '/login': (context) => LoginPage(),
-        '/home': (context) => HomePage(),
-        '/product': (context) => ProductPage(),
-        '/form': (context) => FormPage(),
+        '/login': (context) => const LoginPage(),
+        '/signup': (context) => const SignUpPage(),
+        '/home': (context) => const HomePage(),
+        '/product': (context) => const ProductPage(),
+        '/form': (context) => const FormPage(),
       },
     );
   }

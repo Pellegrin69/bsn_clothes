@@ -1,10 +1,10 @@
-import 'package:bsn_clothes/features/user_auth/presentation/pages/home_page.dart';
-import 'package:bsn_clothes/features/user_auth/presentation/pages/login_page.dart';
-import 'package:bsn_clothes/features/user_auth/presentation/widgets/form_container_widget.dart';
-import 'package:bsn_clothes/global/common/toast.dart';
+import 'package:bsn_clothes/services/firebase_auth_services.dart';
+import 'package:bsn_clothes/widgets/form_container.dart';
+import 'package:bsn_clothes/widgets/toast.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flutter/material.dart';
-import '../firebase_auth_implementation/firebase_auth_services.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -44,15 +44,15 @@ class _SignUpPageState extends State<SignUpPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Text(
-                "Sign Up",
-                style: TextStyle(fontSize: 27, fontWeight: FontWeight.bold),
+                "Welcome to BSN Clothes!",
+                style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
               ),
               const SizedBox(
                 height: 30,
               ),
               FormContainerWidget(
                 controller: _usernameController,
-                hintText: "Username",
+                labelText: "Username",
                 isPasswordField: false,
               ),
               const SizedBox(
@@ -60,7 +60,7 @@ class _SignUpPageState extends State<SignUpPage> {
               ),
               FormContainerWidget(
                 controller: _emailController,
-                hintText: "Email",
+                labelText: "Email",
                 isPasswordField: false,
               ),
               const SizedBox(
@@ -68,7 +68,7 @@ class _SignUpPageState extends State<SignUpPage> {
               ),
               FormContainerWidget(
                 controller: _passwordController,
-                hintText: "Password",
+                labelText: "Password",
                 isPasswordField: true,
               ),
               const SizedBox(
@@ -110,11 +110,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                   GestureDetector(
                       onTap: () {
-                        Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const LoginPage()),
-                            (route) => false);
+                        Navigator.pushNamed(context, "/login");
                       },
                       child: const Text(
                         "Login",
@@ -135,7 +131,6 @@ class _SignUpPageState extends State<SignUpPage> {
       isSigningUp = true;
     });
 
-    String username = _usernameController.text;
     String email = _emailController.text;
     String password = _passwordController.text;
 
@@ -146,12 +141,7 @@ class _SignUpPageState extends State<SignUpPage> {
     });
     if (user != null) {
       showToast(message: "User is successfully created");
-      // Navigator.pushNamed(context, "/home");
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const HomePage(),
-          ));
+      Navigator.pushNamed(context, "/home");
     } else {
       showToast(message: "Some error happened");
     }

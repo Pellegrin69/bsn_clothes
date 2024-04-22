@@ -1,4 +1,4 @@
-import 'package:bsn_clothes/global/common/toast.dart';
+import 'package:bsn_clothes/widgets/toast.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class FirebaseAuthService {

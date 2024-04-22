@@ -34,15 +34,9 @@ class _FormContainerWidgetState extends State<FormContainerWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: double.infinity,
-      clipBehavior: Clip.hardEdge,
-      decoration: BoxDecoration(
-        color: Colors.grey.withOpacity(.35),
-        borderRadius: BorderRadius.circular(10),
-      ),
       child: TextFormField(
-        style: const TextStyle(color: Colors.black),
         controller: widget.controller,
         keyboardType: widget.inputType,
         key: widget.fieldKey,
@@ -51,10 +45,8 @@ class _FormContainerWidgetState extends State<FormContainerWidget> {
         validator: widget.validator,
         onFieldSubmitted: widget.onFieldSubmitted,
         decoration: InputDecoration(
-          border: InputBorder.none,
-          filled: true,
-          hintText: widget.hintText,
-          hintStyle: const TextStyle(color: Colors.black45),
+          labelText: widget.labelText,
+          border: const OutlineInputBorder(),
           suffixIcon: GestureDetector(
             onTap: () {
               setState(() {
