@@ -18,7 +18,7 @@ class NavBar extends StatelessWidget implements PreferredSizeWidget {
               size: 30,
             ),
           ),
-          Text('Vinteeeed'),
+          Text('BSN Clothes'),
         ],
       ),
       actions: [

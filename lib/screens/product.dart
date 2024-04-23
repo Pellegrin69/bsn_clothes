@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import '../widgets/navbar.dart';
+
 class ProductPage extends StatelessWidget {
   const ProductPage({super.key});
 
@@ -10,9 +12,8 @@ class ProductPage extends StatelessWidget {
     final String productId = ModalRoute.of(context)!.settings.arguments as String;
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Produit'),
-      ),
+      appBar: NavBar(),
+        endDrawer: NavBar.buildDrawer(context),
       body: StreamBuilder<DocumentSnapshot>(
         stream: FirebaseFirestore.instance.collection('articles').doc(productId).snapshots(),
         builder: (context, snapshot) {
@@ -56,6 +57,28 @@ class ProductPage extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: Text(
                     'Prix: ${productData['price']} €',
+                    style: const TextStyle(
+                      fontSize: 18.0,
+                    ),
+                  ),
+                ),
+                // Description
+                // Taille
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Text(
+                    'Taille: ${productData['size']}',
+                    style: const TextStyle(
+                      fontSize: 18.0,
+                    ),
+                  ),
+                ),
+                // Description
+                // Marque
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Text(
+                    'Marque: ${productData['brand']}',
                     style: const TextStyle(
                       fontSize: 18.0,
                     ),
