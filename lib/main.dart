@@ -15,7 +15,6 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp(
-    name: 'bsn-clothes',
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
@@ -25,16 +24,15 @@ Future<void> main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'BSN Clothes',
-      home: const SplashScreen(
-        child: LoginPage(),
-      ),
       routes: {
+        '/': (context) => const SplashScreen(
+              child: LoginPage(),
+            ),
         '/login': (context) => const LoginPage(),
         '/signup': (context) => const SignUpPage(),
         '/home': (context) => const HomePage(),

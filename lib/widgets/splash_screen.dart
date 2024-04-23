@@ -13,10 +13,9 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     Future.delayed(const Duration(seconds: 2), () {
       Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(builder: (context) => widget.child!),
-        (route) => false,
-      );
+          context,
+          MaterialPageRoute(builder: (context) => widget.child!),
+          (route) => false);
     });
     super.initState();
   }
@@ -25,11 +24,15 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return const Scaffold(
       body: Center(
-          child: Text(
-        "BSN Clothes",
-        style: TextStyle(
-            color: Colors.blue, fontWeight: FontWeight.bold, fontSize: 40),
-      )),
+        child: Text(
+          "BSN Clothes",
+          style: TextStyle(
+            color: Colors.blue,
+            fontWeight: FontWeight.bold,
+            fontSize: 40,
+          ),
+        ),
+      ),
     );
   }
 }
